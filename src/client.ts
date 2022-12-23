@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import chalk from 'chalk';
 import debug from 'debug';
 
-const log = debug('umami:prisma');
+const log = debug('umami:prisma-client');
 const PRISMA = Symbol();
 
 const PRISMA_OPTIONS = {
