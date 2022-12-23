@@ -1,5 +1,5 @@
 {
-  "name": "@umami/prisma",
+  "name": "@umami/prisma-client",
   "version": "0.1.0",
   "description": "Prisma client wrapper",
   "main": "dist/index.js",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/umami-software/connect.git"
+    "url": "git+https://github.com/umami-software/prisma-client.git"
   },
   "scripts": {
     "build": "rollup -c"
