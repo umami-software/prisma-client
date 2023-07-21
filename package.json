@@ -1,6 +1,6 @@
 {
   "name": "@umami/prisma-client",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Prisma client wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "debug": "^4.3.4"
   },
   "peerDependencies": {

@@ -27,6 +27,6 @@ export default [
       }),
     ],
 
-    external: ['@prisma/client', 'debug', 'chalk'],
+    external: ['@prisma/client'],
   },
 ];
