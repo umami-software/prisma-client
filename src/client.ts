@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { readReplicas } from '@prisma/extension-read-replicas';
 import chalk from 'chalk';
 import debug from 'debug';
 import { PrismaClientOptions, RawValue } from '@prisma/client/runtime';
@@ -28,6 +29,14 @@ function getClient(options: PrismaClientOptions): PrismaClient {
 
   if (process.env.NODE_ENV !== 'production') {
     global[PRISMA] = client;
+  }
+
+  if (process.env.DATABASE_REPLICA_URL) {
+    client.$extends(
+      readReplicas({
+        url: process.env.DATABASE_REPLICA_URL,
+      }),
+    );
   }
 
   log('Prisma initialized');
