@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { readReplicas } from '@prisma/extension-read-replicas';
+import { PrismaClientOptions, RawValue } from '@prisma/client/runtime';
 import chalk from 'chalk';
 import debug from 'debug';
-import { PrismaClientOptions, RawValue } from '@prisma/client/runtime';
 
 const log = debug('umami:prisma-client');
 const PRISMA = Symbol();

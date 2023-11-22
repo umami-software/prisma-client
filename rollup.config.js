@@ -26,7 +26,6 @@ export default [
         },
       }),
     ],
-
-    external: ['@prisma/client'],
+    external: ['@prisma/client', '@prisma/extension-read-replicas'],
   },
 ];
