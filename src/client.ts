@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { readReplicas } from '@prisma/extension-read-replicas';
-import { PrismaClientOptions, RawValue } from '@prisma/client/runtime';
+import { PrismaClientOptions, RawValue } from '@prisma/client/runtime/library';
 import chalk from 'chalk';
 import debug from 'debug';
 
