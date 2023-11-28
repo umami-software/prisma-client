@@ -45,7 +45,9 @@ function getClient(options: PrismaClientOptions): PrismaClient {
 }
 
 async function rawQuery(query: string, params: RawValue[] = []) {
-  return prisma.$queryRawUnsafe.apply(prisma, [query, ...params]);
+  return process.env.DATABASE_REPLICA_URL
+    ? prisma.$replica().$queryRawUnsafe.apply(prisma, [query, ...params])
+    : prisma.$queryRawUnsafe.apply(prisma, [query, ...params]);
 }
 
 async function transaction(input: any, options?: any) {
