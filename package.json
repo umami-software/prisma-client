@@ -1,6 +1,6 @@
 {
   "name": "@umami/prisma-client",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Prisma client wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,11 +23,11 @@
     "debug": "^4.3.4"
   },
   "peerDependencies": {
-    "@prisma/client": "^4.8.0",
+    "@prisma/client": "^5.4.0",
     "@prisma/extension-read-replicas": "^0.3.0"
   },
   "devDependencies": {
-    "@prisma/client": "^4.8.0",
+    "@prisma/client": "^5.4.0",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@types/node": "^18.7.13",

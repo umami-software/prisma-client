@@ -27,16 +27,16 @@ function getClient(options: PrismaClientOptions): PrismaClient {
     client.$on('query', logQuery);
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    global[PRISMA] = client;
-  }
-
   if (process.env.DATABASE_REPLICA_URL) {
     client.$extends(
       readReplicas({
         url: process.env.DATABASE_REPLICA_URL,
       }),
     );
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    global[PRISMA] = client;
   }
 
   log('Prisma initialized');
