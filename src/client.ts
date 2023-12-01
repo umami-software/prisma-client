@@ -20,19 +20,17 @@ function logQuery({ params, query, duration }) {
   log(chalk.yellow(params), '->', query, chalk.greenBright(`${duration}ms`));
 }
 
-function getClient(options: PrismaClientOptions): PrismaClient {
-  const client = new PrismaClient(options);
+function getClient(options: PrismaClientOptions) {
+  const client = process.env.DATABASE_REPLICA_URL
+    ? new PrismaClient(options).$extends(
+        readReplicas({
+          url: process.env.DATABASE_REPLICA_URL ?? '',
+        }),
+      )
+    : new PrismaClient(options);
 
   if (process.env.LOG_QUERY) {
     client.$on('query', logQuery);
-  }
-
-  if (process.env.DATABASE_REPLICA_URL) {
-    client.$extends(
-      readReplicas({
-        url: process.env.DATABASE_REPLICA_URL,
-      }),
-    );
   }
 
   if (process.env.NODE_ENV !== 'production') {
