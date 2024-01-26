@@ -21,8 +21,7 @@
   "dependencies": {
     "@prisma/extension-read-replicas": "^0.3.0",
     "chalk": "^4.1.2",
-    "debug": "^4.3.4",
-    "sql-formatter": "^15.1.2"
+    "debug": "^4.3.4"
   },
   "peerDependencies": {
     "@prisma/client": "^4.8.0",
