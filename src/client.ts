@@ -1,14 +1,25 @@
-import UmamiPrismaClient from './UmamiPrismaClient';
 import { PrismaClientOptions } from '@prisma/client/runtime/library';
+import { PrismaClient } from '@prisma/client';
+import { readReplicas } from '@prisma/extension-read-replicas';
+import debug from 'debug';
 
+const log = debug('umami:prisma-client');
 const PRISMA = Symbol();
+const PRISMA_LOG_OPTIONS = {
+  log: [
+    {
+      emit: 'event',
+      level: 'query',
+    },
+  ],
+};
 
 export function getClient(params?: {
   logQuery?: boolean;
   queryLogger?: () => void;
   replicaUrl?: string;
   options?: PrismaClientOptions;
-}): UmamiPrismaClient {
+}): PrismaClient {
   const {
     logQuery = !!process.env.LOG_QUERY,
     queryLogger,
@@ -16,16 +27,29 @@ export function getClient(params?: {
     options,
   } = params || {};
 
-  return new UmamiPrismaClient({
-    logQuery,
-    queryLogger,
-    replicaUrl,
-    options,
+  const client = new PrismaClient({
+    errorFormat: 'pretty',
+    ...(logQuery && PRISMA_LOG_OPTIONS),
+    ...options,
   });
+
+  if (replicaUrl) {
+    client.$extends(
+      readReplicas({
+        url: replicaUrl,
+      }),
+    );
+  }
+
+  if (logQuery) {
+    client.$on('query', queryLogger || log);
+  }
+
+  log('Prisma initialized');
+
+  return client;
 }
 
 const client = global[PRISMA] || getClient();
 
-export { UmamiPrismaClient };
-
-export default { client, PRISMA };
+export default { client, log, PRISMA };
