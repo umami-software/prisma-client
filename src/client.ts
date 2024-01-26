@@ -1,6 +1,6 @@
-import { PrismaClientOptions } from '@prisma/client/runtime/library';
 import { PrismaClient } from '@prisma/client';
 import { readReplicas } from '@prisma/extension-read-replicas';
+import { PrismaClientOptions, RawValue } from '@prisma/client/runtime/library';
 import debug from 'debug';
 
 const log = debug('umami:prisma-client');
@@ -52,4 +52,14 @@ export function getClient(params?: {
 
 const client = global[PRISMA] || getClient();
 
-export default { client, log, PRISMA };
+async function rawQuery(query: string, params: RawValue[] = []) {
+  return process.env.DATABASE_REPLICA_URL
+    ? client.$replica().$queryRawUnsafe(query, params)
+    : client.$queryRawUnsafe(query, params);
+}
+
+async function transaction(input: any, options?: any) {
+  return client.$transaction(input, options);
+}
+
+export default { client, log, PRISMA, rawQuery, transaction };
