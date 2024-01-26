@@ -3,6 +3,7 @@ import { readReplicas } from '@prisma/extension-read-replicas';
 import { PrismaClientOptions, RawValue } from '@prisma/client/runtime';
 import chalk from 'chalk';
 import debug from 'debug';
+import { format } from 'sql-formatter';
 
 const log = debug('umami:prisma-client');
 const PRISMA = Symbol();
@@ -17,7 +18,7 @@ const PRISMA_OPTIONS: PrismaClientOptions = {
 };
 
 function logQuery({ params, query, duration }) {
-  log(chalk.yellow(params), '->', query, chalk.greenBright(`${duration}ms`));
+  log(chalk.yellow(params), '->', format(query), chalk.greenBright(`${duration}ms`));
 }
 
 function getClient(options: PrismaClientOptions): PrismaClient {
