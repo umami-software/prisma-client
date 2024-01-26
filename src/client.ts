@@ -1,5 +1,5 @@
 import UmamiPrismaClient from './UmamiPrismaClient';
-import { PrismaClientOptions } from '@prisma/client/runtime';
+import { PrismaClientOptions } from '@prisma/client/runtime/library';
 
 const PRISMA = Symbol();
 
