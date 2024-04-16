@@ -27,14 +27,14 @@ export function getClient(params?: {
     options,
   } = params || {};
 
-  const client = new PrismaClient({
+  const prisma = new PrismaClient({
     errorFormat: 'pretty',
     ...(logQuery && PRISMA_LOG_OPTIONS),
     ...options,
   });
 
   if (replicaUrl) {
-    client.$extends(
+    prisma.$extends(
       readReplicas({
         url: replicaUrl,
       }),
@@ -42,12 +42,12 @@ export function getClient(params?: {
   }
 
   if (logQuery) {
-    client.$on('query', queryLogger || log);
+    prisma.$on('query', queryLogger || log);
   }
 
   log('Prisma initialized');
 
-  return client;
+  return prisma;
 }
 
 const client = global[PRISMA] || getClient();
