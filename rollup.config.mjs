@@ -7,7 +7,7 @@ const external = ['@prisma/client', '@prisma/extension-read-replicas'];
 
 export default [
   {
-    input: 'src/client.ts',
+    input: 'src/index.ts',
     output: [
       {
         file: 'dist/index.js',
@@ -19,7 +19,7 @@ export default [
     external,
   },
   {
-    input: 'src/client.ts',
+    input: 'src/index.ts',
     output: [
       {
         file: 'dist/index.d.ts',

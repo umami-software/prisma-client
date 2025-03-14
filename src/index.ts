@@ -4,7 +4,7 @@ import { PrismaClientOptions, RawValue } from '@prisma/client/runtime/library';
 import debug from 'debug';
 
 const log = debug('umami:prisma-client');
-const PRISMA = Symbol();
+const PRISMA = 'prisma';
 const PRISMA_LOG_OPTIONS = {
   log: [
     {
