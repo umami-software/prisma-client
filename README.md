@@ -5,23 +5,19 @@ Prisma client wrapper
 # Installation
 
 ```
-npm install @umami/prisma-client
+pnpm add @umami/prisma-client
 ```
 
 # Usage
 
-Declare an environment variable for the connection:
-
-```
-DATABASE_URL=postgresql://username:password@hostname:port/database
-```
-
-See https://www.prisma.io/docs/reference/database-reference/connection-urls
-
-Example usage:
-
 ```javascript
-import prisma from '@umami/prisma-client';
+import { UmamiPrismaClient } from '@umami/prisma-client';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new UmamiPrismaClient({
+  url: process.env.DATABASE_URL,
+  prismaClient: PrismaClient
+});
 
 const user = await prisma.client.user.findUnique({
   where: {

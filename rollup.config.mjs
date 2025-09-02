@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
 import dts from 'rollup-plugin-dts';
 
-const external = ['@prisma/client', '@prisma/extension-read-replicas'];
+const external = ['@prisma/client', '@prisma/extension-read-replicas', '@prisma/adapter-pg'];
 
 export default [
   {
